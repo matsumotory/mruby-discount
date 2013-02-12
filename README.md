@@ -1,7 +1,7 @@
 # Markdown Module for mruby
-mruby markdown module.
+mruby markdown class.
 
-convert markdown to html using discount
+convert markdown to html using [discount](https://github.com/Orc/discount)
 
 ## install by mrbgems
  - add conf.gem line to `build_config.rb`

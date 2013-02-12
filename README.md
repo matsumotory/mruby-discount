@@ -34,6 +34,7 @@ puts m.footer
 ```
 
  - result
+
  ```html
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -63,7 +64,6 @@ puts m.footer
 
 </body>
 </html>
-
  ```
 
 # License

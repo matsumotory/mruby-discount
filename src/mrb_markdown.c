@@ -44,10 +44,6 @@ typedef struct {
     char *title;
 } mrb_md_context;
 
-//
-// private
-//
-
 static void mrb_md_context_free(mrb_state *mrb, void *p)
 {
     mrb_md_context *ctx = p;
@@ -101,7 +97,8 @@ mrb_value mrb_markdown_header(mrb_state *mrb, mrb_value self)
 
     char header[HEADER_SIZE];
 
-    snprintf(header, HEADER_SIZE, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+    snprintf(header, HEADER_SIZE, 
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
         "<!DOCTYPE html PUBLIC \n"
         "              \"-//W3C//DTD XHTML 1.0 Strict//EN\"\n"
         "              \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
@@ -127,7 +124,8 @@ mrb_value mrb_markdown_footer(mrb_state *mrb, mrb_value self)
 
     char footer[FOOTER_SIZE];
 
-    snprintf(footer, FOOTER_SIZE, "\n"
+    snprintf(footer, FOOTER_SIZE, 
+        "\n"
         "</body>\n"
         "</html>\n"
     );

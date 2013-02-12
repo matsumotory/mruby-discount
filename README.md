@@ -28,8 +28,8 @@ title
 '
 
 puts m.header
-#puts m.md2html(markdown)
 puts markdown.to_html
+# or puts m.md2html(markdown)
 puts m.md2html("## subtitle2")
 puts m.md2html("- foo")
 puts m.footer

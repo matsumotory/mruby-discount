@@ -1,5 +1,5 @@
 /*
-** mrb_markdown - markdown class for mruby
+** mrb_discount - markdown class for mruby using discount
 **
 ** Copyright (c) mod_mruby developers 2012-
 **
@@ -67,7 +67,7 @@ static mrb_md_context *mrb_md_get_context(mrb_state *mrb,  mrb_value self, char 
     return c;
 }
 
-mrb_value mrb_markdown_init(mrb_state *mrb, mrb_value self)
+mrb_value mrb_discount_init(mrb_state *mrb, mrb_value self)
 {
     mrb_md_context *md_ctx = (mrb_md_context *)malloc(sizeof(mrb_md_context));
     mrb_value css_path;
@@ -91,7 +91,7 @@ mrb_value mrb_markdown_init(mrb_state *mrb, mrb_value self)
     return self;
 }
 
-mrb_value mrb_markdown_header(mrb_state *mrb, mrb_value self)
+mrb_value mrb_discount_header(mrb_state *mrb, mrb_value self)
 {
     mrb_md_context *md_ctx = mrb_md_get_context(mrb, self, "mrb_md_context");
 
@@ -118,7 +118,7 @@ mrb_value mrb_markdown_header(mrb_state *mrb, mrb_value self)
 }
  
 
-mrb_value mrb_markdown_footer(mrb_state *mrb, mrb_value self)
+mrb_value mrb_discount_footer(mrb_state *mrb, mrb_value self)
 {
     mrb_md_context *md_ctx = mrb_md_get_context(mrb, self, "mrb_md_context");
 
@@ -133,7 +133,7 @@ mrb_value mrb_markdown_footer(mrb_state *mrb, mrb_value self)
     return mrb_str_new(mrb, footer, strlen(footer));
 }
 
-mrb_value mrb_markdown_md2html(mrb_state *mrb, mrb_value self)
+mrb_value mrb_discount_md2html(mrb_state *mrb, mrb_value self)
 {
     MMIOT *md;
     mrb_value md_obj;
@@ -153,20 +153,38 @@ mrb_value mrb_markdown_md2html(mrb_state *mrb, mrb_value self)
 
 }
  
-void mrb_mruby_markdown_gem_init(mrb_state *mrb)
+mrb_value mrb_discount_to_html(mrb_state *mrb, mrb_value self)
 {
-    struct RClass *markdown;
+    MMIOT *md;
+    int size;
+    char *html;
 
-    markdown = mrb_define_class(mrb, "Markdown", mrb->object_class);
+    md = mkd_string(RSTRING_PTR(self), strlen(RSTRING_PTR(self)), 0);
+    int ret = mkd_compile(md, MKD_TOC|MKD_AUTOLINK);
+    if ((size = mkd_document(md, &html)) == EOF)
+        mrb_raise(mrb, E_RUNTIME_ERROR, "mkd_document() failed");
 
-    mrb_define_method(mrb, markdown, "initialize",  mrb_markdown_init,      ARGS_ANY());
-    mrb_define_method(mrb, markdown, "header",      mrb_markdown_header,    ARGS_NONE());
-    mrb_define_method(mrb, markdown, "footer",      mrb_markdown_footer,    ARGS_NONE());
-    mrb_define_method(mrb, markdown, "md2html",     mrb_markdown_md2html,   ARGS_ANY());
+    //mkd_cleanup(md);
+        
+    return mrb_str_new(mrb, html, strlen(html));
+
+}
+
+void mrb_mruby_discount_gem_init(mrb_state *mrb)
+{
+    struct RClass *discount;
+
+    discount = mrb_define_class(mrb, "Discount", mrb->object_class);
+
+    mrb_define_method(mrb, discount,            "initialize",  mrb_discount_init,      ARGS_ANY());
+    mrb_define_method(mrb, discount,            "header",      mrb_discount_header,    ARGS_NONE());
+    mrb_define_method(mrb, discount,            "footer",      mrb_discount_footer,    ARGS_NONE());
+    mrb_define_method(mrb, discount,            "md2html",     mrb_discount_md2html,   ARGS_ANY());
+    mrb_define_method(mrb, mrb->string_class,   "to_html",     mrb_discount_to_html,   ARGS_NONE());
     DONE;
 }
 
-void mrb_mruby_markdown_gem_final(mrb_state *mrb)
+void mrb_mruby_discount_gem_final(mrb_state *mrb)
 {
 }
 

@@ -1,4 +1,4 @@
-m = Markdown.new("http://kevinburke.bitbucket.org/markdowncss/markdown.css", "titlehoge")
+m = Discount.new("http://kevinburke.bitbucket.org/markdowncss/markdown.css", "titlehoge")
 
 markdown = '
 # title
@@ -9,7 +9,8 @@ title
 '
 
 puts m.header
-puts m.md2html(markdown)
+puts markdown.to_html
+# or puts m.md2html(markdown)
 puts m.md2html("## subtitle2")
 puts m.md2html("- foo")
 puts m.footer

@@ -1,7 +1,7 @@
 # Markdown Module for mruby
 mruby markdown module.
 
-convert markdown to html
+convert markdown to html using discount
 
 ## install by mrbgems
  - add conf.gem line to `build_config.rb`
@@ -17,7 +17,7 @@ end
 ## example
 
 ```ruby
-m = Markdown.new("http://kevinburke.bitbucket.org/markdowncss/markdown.css", "titlehoge")
+m = Discount.new("http://kevinburke.bitbucket.org/markdowncss/markdown.css", "titlehoge")
 
 markdown = '
 # title
@@ -28,7 +28,8 @@ title
 '
 
 puts m.header
-puts m.md2html(markdown)
+#puts m.md2html(markdown)
+puts markdown.to_html
 puts m.md2html("## subtitle2")
 puts m.md2html("- foo")
 puts m.footer

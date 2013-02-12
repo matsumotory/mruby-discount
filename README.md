@@ -17,20 +17,21 @@ end
 ## example
 
 ```ruby
-m = Markdown.new("http://kevinburke.bitbucket.org/markdowncss/markdown.css", "titlename")
+m = Markdown.new("http://kevinburke.bitbucket.org/markdowncss/markdown.css", "titlehoge")
 
-markdown = "
+markdown = '
 # title
 title
 ## subtitle
 - hoge
 - fuga
-"
+'
 
 puts m.header
 puts m.md2html(markdown)
+puts m.md2html("## subtitle2")
+puts m.md2html("- foo")
 puts m.footer
-
 ```
 
 
@@ -44,7 +45,7 @@ puts m.footer
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <link rel="stylesheet" href="http://kevinburke.bitbucket.org/markdowncss/markdown.css" type="text/css" />
-<title>titlename</title>
+<title>titlehoge</title>
 </head>
 <body>
 <a name="title"></a>
@@ -58,6 +59,11 @@ puts m.footer
 <ul>
 <li>hoge</li>
 <li>fuga</li>
+</ul>
+<a name="subtitle2"></a>
+<h2>subtitle2</h2>
+<ul>
+<li>foo</li>
 </ul>
 
 </body>

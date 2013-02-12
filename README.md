@@ -10,7 +10,7 @@ MRuby::Build.new do |conf|
 
     # ... (snip) ...
 
-    conf.gem :git => 'https://github.com/matsumoto-r/mruby-markdown.git'
+    conf.gem :git => 'https://github.com/matsumoto-r/mruby-discount.git'
 end
 ```
 

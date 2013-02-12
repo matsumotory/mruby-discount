@@ -16,6 +16,8 @@ end
 
 ## example
 
+ - code
+
 ```ruby
 m = Markdown.new("http://kevinburke.bitbucket.org/markdowncss/markdown.css", "titlename")
 
@@ -39,17 +41,17 @@ puts m.footer
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC
               "-//W3C//DTD XHTML 1.0 Strict//EN"
-                            "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-                            <html xmlns="http://www.w3.org/1999/xhtml">
-                            <head>
-                            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-                            <meta http-equiv="Content-Style-Type" content="text/css" />
-                            <link rel="stylesheet" href="http://kevinburke.bitbucket.org/markdowncss/markdown.css" type="text/css" />
-                            <title>titlename</title>
-                            </head>
-                            <body>
-                            <a name="title"></a>
-                            <h1>title</h1>
+              "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<link rel="stylesheet" href="http://kevinburke.bitbucket.org/markdowncss/markdown.css" type="text/css" />
+<title>titlename</title>
+</head>
+<body>
+<a name="title"></a>
+<h1>title</h1>
 
 <p>title</p>
 

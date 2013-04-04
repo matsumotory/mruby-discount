@@ -47,7 +47,7 @@ typedef struct {
 static void mrb_md_context_free(mrb_state *mrb, void *p)
 {
     mrb_md_context *ctx = p;
-    free(ctx);
+    mrb_free(mrb, ctx);
 }
 
 static const struct mrb_data_type mrb_md_context_type = {
@@ -69,7 +69,7 @@ static mrb_md_context *mrb_md_get_context(mrb_state *mrb,  mrb_value self, char 
 
 mrb_value mrb_discount_init(mrb_state *mrb, mrb_value self)
 {
-    mrb_md_context *md_ctx = (mrb_md_context *)malloc(sizeof(mrb_md_context));
+    mrb_md_context *md_ctx = (mrb_md_context *)mrb_malloc(mrb, sizeof(mrb_md_context));
     mrb_value css_path;
     mrb_value title;
 

@@ -59,7 +59,7 @@ static mrb_md_context *mrb_md_get_context(mrb_state *mrb,  mrb_value self, char 
     mrb_md_context *c;
     mrb_value context;
 
-    context = mrb_iv_get(mrb, self, mrb_intern(mrb, ctx_flag));
+    context = mrb_iv_get(mrb, self, mrb_intern_cstr(mrb, ctx_flag));
     Data_Get_Struct(mrb, context, &mrb_md_context_type, c);
     if (!c)
         mrb_raise(mrb, E_RUNTIME_ERROR, "get mrb__context failed");
@@ -80,7 +80,7 @@ mrb_value mrb_discount_init(mrb_state *mrb, mrb_value self)
 
     mrb_iv_set(mrb
         , self
-        , mrb_intern(mrb, "mrb_md_context")
+        , mrb_intern_cstr(mrb, "mrb_md_context")
         , mrb_obj_value(Data_Wrap_Struct(mrb
             , mrb->object_class
             , &mrb_md_context_type

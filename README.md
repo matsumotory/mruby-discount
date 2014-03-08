@@ -29,10 +29,12 @@ title
 
 puts m.header
 puts markdown.to_html
-# or puts m.md2html(markdown)
-puts m.md2html("## subtitle2")
+puts "## subtitle2".to_html
 puts "- foo".to_html
 puts m.footer
+
+# # Or
+# puts m.md2html(markdown + "\n" + "## subtitle2" + "- foo")
 ```
 
 

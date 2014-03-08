@@ -1,4 +1,4 @@
-# Markdown Module for mruby
+# Markdown Class for mruby
 mruby markdown class.
 
 convert markdown to html using [discount](https://github.com/Orc/discount)

@@ -160,9 +160,10 @@ mrb_value mrb_discount_md2html(mrb_state *mrb, mrb_value self)
     footer = mrb_discount_footer(mrb, self);
     data = mrb_str_plus(mrb, header, mrb_str_new(mrb, html, strlen(html)));
     data = mrb_str_plus(mrb, data, footer);
+
+    mkd_cleanup(md);
         
     return data;
-
 }
  
 mrb_value mrb_discount_to_html(mrb_state *mrb, mrb_value self)
@@ -173,10 +174,10 @@ mrb_value mrb_discount_to_html(mrb_state *mrb, mrb_value self)
 
     md = mkd_string(RSTRING_PTR(self), strlen(RSTRING_PTR(self)), 0);
     mkd_compile(md, MKD_TOC|MKD_AUTOLINK);
-    if ((size = mkd_document(md, &html)) == EOF)
+    if ((size = mkd_document(md, &html)) == EOF) {
         mrb_raise(mrb, E_RUNTIME_ERROR, "mkd_document() failed");
-
-    //mkd_cleanup(md);
+    }
+    mkd_cleanup(md);
         
     return mrb_str_new(mrb, html, strlen(html));
 

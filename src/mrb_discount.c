@@ -97,7 +97,7 @@ mrb_value mrb_discount_header(mrb_state *mrb, mrb_value self)
 
     char header[HEADER_SIZE];
 
-    snprintf(header, HEADER_SIZE, 
+    snprintf(header, HEADER_SIZE + strlen(md_ctx->title) + strlen(md_ctx->css), 
         //"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
         //"<!DOCTYPE html PUBLIC \n"
         //"              \"-//W3C//DTD XHTML 1.0 Strict//EN\"\n"

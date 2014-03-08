@@ -94,10 +94,13 @@ mrb_value mrb_discount_init(mrb_state *mrb, mrb_value self)
 mrb_value mrb_discount_header(mrb_state *mrb, mrb_value self)
 {
     mrb_md_context *md_ctx = mrb_md_get_context(mrb, self, "mrb_md_context");
+    char *header;
+    size_t len;
 
-    char header[HEADER_SIZE];
+    len = HEADER_SIZE + strlen(md_ctx->title) + strlen(md_ctx->css);
+    header = (char *)mrb_malloc(mrb, len);
 
-    snprintf(header, HEADER_SIZE + strlen(md_ctx->title) + strlen(md_ctx->css), 
+    snprintf(header, len,
         //"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
         //"<!DOCTYPE html PUBLIC \n"
         //"              \"-//W3C//DTD XHTML 1.0 Strict//EN\"\n"
@@ -120,8 +123,6 @@ mrb_value mrb_discount_header(mrb_state *mrb, mrb_value self)
 
 mrb_value mrb_discount_footer(mrb_state *mrb, mrb_value self)
 {
-    mrb_md_context *md_ctx = mrb_md_get_context(mrb, self, "mrb_md_context");
-
     char footer[FOOTER_SIZE];
 
     snprintf(footer, FOOTER_SIZE, 
@@ -143,7 +144,7 @@ mrb_value mrb_discount_md2html(mrb_state *mrb, mrb_value self)
     mrb_get_args(mrb, "o", &md_obj);
 
     md = mkd_string(RSTRING_PTR(md_obj), strlen(RSTRING_PTR(md_obj)), 0);
-    int ret = mkd_compile(md, MKD_TOC|MKD_AUTOLINK);
+    mkd_compile(md, MKD_TOC|MKD_AUTOLINK);
     if ((size = mkd_document(md, &html)) == EOF)
         mrb_raise(mrb, E_RUNTIME_ERROR, "mkd_document() failed");
 
@@ -160,7 +161,7 @@ mrb_value mrb_discount_to_html(mrb_state *mrb, mrb_value self)
     char *html;
 
     md = mkd_string(RSTRING_PTR(self), strlen(RSTRING_PTR(self)), 0);
-    int ret = mkd_compile(md, MKD_TOC|MKD_AUTOLINK);
+    mkd_compile(md, MKD_TOC|MKD_AUTOLINK);
     if ((size = mkd_document(md, &html)) == EOF)
         mrb_raise(mrb, E_RUNTIME_ERROR, "mkd_document() failed");
 

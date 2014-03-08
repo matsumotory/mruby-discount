@@ -136,21 +136,32 @@ mrb_value mrb_discount_footer(mrb_state *mrb, mrb_value self)
 
 mrb_value mrb_discount_md2html(mrb_state *mrb, mrb_value self)
 {
+    mrb_md_context *md_ctx = mrb_md_get_context(mrb, self, "mrb_md_context");
     MMIOT *md;
     mrb_value md_obj;
     int size;
-    char *html;
+    char *html, *title;
+    mrb_value header, footer, data;
 
     mrb_get_args(mrb, "o", &md_obj);
 
     md = mkd_string(RSTRING_PTR(md_obj), strlen(RSTRING_PTR(md_obj)), 0);
     mkd_compile(md, MKD_TOC|MKD_AUTOLINK);
-    if ((size = mkd_document(md, &html)) == EOF)
-        mrb_raise(mrb, E_RUNTIME_ERROR, "mkd_document() failed");
 
-    //mkd_cleanup(md);
+    title = mkd_doc_title(md);
+    if (title) {
+        md_ctx->title = title;
+    }
+
+    if ((size = mkd_document(md, &html)) == EOF) {
+        mrb_raise(mrb, E_RUNTIME_ERROR, "mkd_document() failed");
+    }
+    header = mrb_discount_header(mrb, self);
+    footer = mrb_discount_footer(mrb, self);
+    data = mrb_str_plus(mrb, header, mrb_str_new(mrb, html, strlen(html)));
+    data = mrb_str_plus(mrb, data, footer);
         
-    return mrb_str_new(mrb, html, strlen(html));
+    return data;
 
 }
  

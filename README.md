@@ -1,4 +1,7 @@
 # Markdown Class for mruby
+
+[![Build Status](https://travis-ci.org/matsumoto-r/mruby-discount.svg?branch=master)](https://travis-ci.org/matsumoto-r/mruby-discount)
+
 mruby markdown class.
 
 convert markdown to html using [discount](https://github.com/Orc/discount)

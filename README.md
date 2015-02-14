@@ -2,9 +2,7 @@
 
 [![Build Status](https://travis-ci.org/matsumoto-r/mruby-discount.svg?branch=master)](https://travis-ci.org/matsumoto-r/mruby-discount)
 
-mruby markdown class.
-
-convert markdown to html using [discount](https://github.com/Orc/discount)
+mruby markdown class. convert markdown to html using [discount](https://github.com/Orc/discount)
 
 ## install by mrbgems
  - add conf.gem line to `build_config.rb`
@@ -13,7 +11,7 @@ MRuby::Build.new do |conf|
 
     # ... (snip) ...
 
-    conf.gem :git => 'https://github.com/matsumoto-r/mruby-discount.git'
+    conf.gem :github => 'matsumoto-r/mruby-discount'
 end
 ```
 

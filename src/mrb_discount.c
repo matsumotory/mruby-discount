@@ -189,11 +189,11 @@ void mrb_mruby_discount_gem_init(mrb_state *mrb)
 
     discount = mrb_define_class(mrb, "Discount", mrb->object_class);
 
-    mrb_define_method(mrb, discount,            "initialize",  mrb_discount_init,      ARGS_ANY());
-    mrb_define_method(mrb, discount,            "header",      mrb_discount_header,    ARGS_NONE());
-    mrb_define_method(mrb, discount,            "footer",      mrb_discount_footer,    ARGS_NONE());
-    mrb_define_method(mrb, discount,            "md2html",     mrb_discount_md2html,   ARGS_ANY());
-    mrb_define_method(mrb, mrb->string_class,   "to_html",     mrb_discount_to_html,   ARGS_NONE());
+    mrb_define_method(mrb, discount,            "initialize",  mrb_discount_init,      MRB_ARGS_ANY());
+    mrb_define_method(mrb, discount,            "header",      mrb_discount_header,    MRB_ARGS_NONE());
+    mrb_define_method(mrb, discount,            "footer",      mrb_discount_footer,    MRB_ARGS_NONE());
+    mrb_define_method(mrb, discount,            "md2html",     mrb_discount_md2html,   MRB_ARGS_ANY());
+    mrb_define_method(mrb, mrb->string_class,   "to_html",     mrb_discount_to_html,   MRB_ARGS_NONE());
     DONE;
 }
 

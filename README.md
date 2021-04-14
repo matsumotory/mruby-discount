@@ -2,9 +2,9 @@
 
 [![Build Status](https://travis-ci.org/matsumoto-r/mruby-discount.svg?branch=master)](https://travis-ci.org/matsumoto-r/mruby-discount)
 
-mruby markdown class. convert markdown to html using [discount](https://github.com/Orc/discount)
+mruby Markdown class. Convert Markdown to HTML using [discount](https://github.com/Orc/discount)
 
-## install by mrbgems
+## Install by mrbgems
  - add conf.gem line to `build_config.rb`
 ```ruby
 MRuby::Build.new do |conf|
@@ -15,7 +15,7 @@ MRuby::Build.new do |conf|
 end
 ```
 
-## example
+## Example
 
 ```ruby
 m = Discount.new("http://kevinburke.bitbucket.org/markdowncss/markdown.css", "titlehoge")
